@@ -53,8 +53,11 @@ public class BrokerStartup {
     public static CommandLine commandLine = null;
     public static String configFile = null;
     public static InternalLogger log;
-
+    //TODO 手动赋值VM启动参数
     public static void main(String[] args) {
+        System.setProperty(MixAll.ROCKETMQ_HOME_PROPERTY, "/Users/kaka/Documents/githubRepository/sourcecode/rocketmq-release-4.5.0");
+        System.setProperty(MixAll.NAMESRV_ADDR_PROPERTY, "127.0.0.1:9876");
+        System.setProperty("rocketmq.client.logRoot","logs/");
         start(createBrokerController(args));
     }
 

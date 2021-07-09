@@ -426,7 +426,9 @@ public class RouteInfoManager {
         return null;
     }
 
+    // 扫描不活动的broker
     public void scanNotActiveBroker() {
+        // 扫描路由信息表
         Iterator<Entry<String, BrokerLiveInfo>> it = this.brokerLiveTable.entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, BrokerLiveInfo> next = it.next();
