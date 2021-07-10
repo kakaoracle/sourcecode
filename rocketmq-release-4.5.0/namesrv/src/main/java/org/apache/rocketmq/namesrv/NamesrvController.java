@@ -84,6 +84,7 @@ public class NamesrvController {
 
         this.registerProcessor();
         // 定时任务,每10s扫描一次broker,移除不活跃的broker
+        // 用的是线程池的定时队列
         this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
             @Override
@@ -100,6 +101,7 @@ public class NamesrvController {
             }
         }, 1, 10, TimeUnit.MINUTES);
 
+        // TLS安全相关的内容
         if (TlsSystemConfig.tlsMode != TlsMode.DISABLED) {
             // Register a listener to reload SslContext
             try {
@@ -153,6 +155,7 @@ public class NamesrvController {
     }
 
     public void start() throws Exception {
+        // 可以接收外部请求了
         this.remotingServer.start();
 
         if (this.fileWatchService != null) {

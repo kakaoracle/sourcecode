@@ -426,13 +426,14 @@ public class RouteInfoManager {
         return null;
     }
 
-    // 扫描不活动的broker
+    // 定时执行该方法,扫描不活动的broker
     public void scanNotActiveBroker() {
         // 扫描路由信息表
         Iterator<Entry<String, BrokerLiveInfo>> it = this.brokerLiveTable.entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, BrokerLiveInfo> next = it.next();
             long last = next.getValue().getLastUpdateTimestamp();
+            // 上一次更新时间 + 设置过期时间 < 当前时间则移除
             if ((last + BROKER_CHANNEL_EXPIRED_TIME) < System.currentTimeMillis()) {
                 RemotingUtil.closeChannel(next.getValue().getChannel());
                 it.remove();
