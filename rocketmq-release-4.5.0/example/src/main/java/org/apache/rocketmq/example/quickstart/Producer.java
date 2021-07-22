@@ -25,6 +25,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
 /**
  * This class demonstrates how to send messages to brokers using provided {@link DefaultMQProducer}.
  */
+// 主要就是三步: 启动,send消息(重点是负载均衡),shutdown
 public class Producer {
     public static void main(String[] args) throws MQClientException, InterruptedException {
 
@@ -64,6 +65,7 @@ public class Producer {
                 /*
                  * Call send message to deliver message to one of brokers.
                  */
+                //TODO 重点是负载均衡
                 SendResult sendResult = producer.send(msg);
 
                 System.out.printf("%s%n", sendResult);

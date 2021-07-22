@@ -220,6 +220,7 @@ public class MQClientInstance {
         return mqList;
     }
 
+    //TODO 消费者核心启动流程
     public void start() throws MQClientException {
 
         synchronized (this) {
@@ -236,7 +237,8 @@ public class MQClientInstance {
                     this.startScheduledTask();
                     // Start pull service
                     this.pullMessageService.start();
-                    // Start rebalance service
+                    // 负载均衡
+                    // 如果是线程,那么不要跟其start方法,要进其类中跟run方法
                     this.rebalanceService.start();
                     // Start push service
                     this.defaultMQProducer.getDefaultMQProducerImpl().start(false);

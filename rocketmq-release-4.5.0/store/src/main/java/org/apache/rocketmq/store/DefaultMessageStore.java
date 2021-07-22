@@ -350,7 +350,7 @@ public class DefaultMessageStore implements MessageStore {
             }
         }
     }
-
+    //TODO Broker典型的存储消息的地方
     public PutMessageResult putMessage(MessageExtBrokerInner msg) {
         if (this.shutdown) {
             log.warn("message store has shutdown, so putMessage is forbidden");
@@ -392,6 +392,7 @@ public class DefaultMessageStore implements MessageStore {
         }
 
         long beginTime = this.getSystemClock().now();
+        //TODO 关键方法 commitlog进行写入消息
         PutMessageResult result = this.commitLog.putMessage(msg);
 
         long eclipseTime = this.getSystemClock().now() - beginTime;
